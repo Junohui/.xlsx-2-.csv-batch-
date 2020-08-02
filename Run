@@ -1,0 +1,28 @@
+#coding=utf-8
+import pandas as pd
+import os
+import time
+
+start = time.perf_counter()
+
+file_dir = r'C:\Users\junoxu\Desktop\test_5'
+file_list = os.listdir(file_dir)
+
+new_list=[]
+
+for file in file_list:
+    file_path = os.path.join(file_dir, file)
+    df = pd.DataFrame(pd.read_excel(file_path, sheet_name=0))
+    new_list.append(df)
+
+    k=0
+    for df in new_list:
+        k += 1
+        df.to_csv(file_dir + r'\output' + str(k) + '.csv', encoding='utf_8_sig')
+
+end = time.perf_counter()
+print("final is in", end - start)
+
+
+
+
